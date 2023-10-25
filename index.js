@@ -25,12 +25,17 @@ const Port = process.env.PORT || 4000;
 
 server.use(cors());
 server.use(express.json());
+server.use(express.static(path.resolve(__dirname, "dist")));
 server.use(express.urlencoded({ extended: true }));
 
 //server routes middleware
+
 server.use("/", userRouter);
 server.use("/api/user", paymentRouter);
 server.use("/user", forgotPasswordRouter);
+server.use("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "dist/index.html"));
+});
 
 //creating acces log
 const accessLog = fs.createWriteStream(path.join(__dirname, "accesslog"), {
