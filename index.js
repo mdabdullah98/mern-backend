@@ -21,7 +21,7 @@ const forgotPasswordRouter = require("./routes/forgotPassword");
 
 const server = express();
 
-const Port = process.env.PORT;
+const Port = process.env.PORT || 4000;
 
 server.use(cors());
 server.use(express.json());
